@@ -1,0 +1,20 @@
+{
+  "id": "ykchorus",
+  "name": "YKChorus",
+  "kind": "audiofx",
+  "version": 1,
+  "credits": "Patrick Kunz / TAL (Togu Audio Line); port via SpotlightKid/ykchorus; wrapper: Akashic Trance Machines",
+  "license": "GPL-2.0",
+
+  "params": [
+    { "id": "mix",     "label": "Mix",      "type": "float", "min": 0.0, "max": 1.0, "default": 0.5,  "step": 0.01, "display": "percent" },
+    { "id": "chorus1", "label": "Chorus 1", "type": "bool",  "default": 1 },
+    { "id": "chorus2", "label": "Chorus 2", "type": "bool",  "default": 1 },
+    { "id": "rate1",   "label": "Rate 1",   "type": "float", "min": 0.0, "max": 1.0, "default": 0.5,  "step": 0.01, "display": "percent" },
+    { "id": "rate2",   "label": "Rate 2",   "type": "float", "min": 0.0, "max": 1.0, "default": 0.83, "step": 0.01, "display": "percent" }
+  ],
+
+  "menu": [
+    { "page": "Main", "items": ["mix", "chorus1", "chorus2", "rate1", "rate2"] }
+  ]
+}
