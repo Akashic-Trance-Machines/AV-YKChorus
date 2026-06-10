@@ -143,6 +143,15 @@ void CYKChorusFX::Process (float *pIoL, float *pIoR, unsigned nFrames)
 		wet = 1.0f;
 	}
 
+	// Normalise wet so N active chorus taps together produce ≈ unity amplitude.
+	// ChorusEngine hardcodes a 1.4× tap scale; without this correction, having
+	// both taps enabled gives a 3.8× combined gain at mix=0.5 (severe clipping
+	// that sounds like silence or a buzz).  Dividing by (nActive × 1.4) brings
+	// the wet signal back to approximately the same level as a single tap.
+	int nActive = (m_pEngine->isChorus1Enabled ? 1 : 0)
+		    + (m_pEngine->isChorus2Enabled ? 1 : 0);
+	float fWetNorm = (nActive > 0) ? wet / (float (nActive) * 1.4f) : 0.0f;
+
 	for (unsigned i = 0; i < nFrames; i++)
-		m_pEngine->process (dry, wet, &pIoL[i], &pIoR[i]);
+		m_pEngine->process (dry, fWetNorm, &pIoL[i], &pIoR[i]);
 }
